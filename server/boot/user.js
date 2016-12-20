@@ -100,15 +100,11 @@ function buildDisplayChallenges(
   userChallengeMap = {},
   timezone
 ) {
-    console.log('blah blah................................')
   return Observable.from(Object.keys(userChallengeMap))
     .map(challengeId => userChallengeMap[challengeId])
     .map(userChallenge => {
-        console.log(userChallenge);
-        console.log('*******************************************')
       const challengeId = userChallenge.id;
       const challenge = challengeMap[ challengeIdToName[challengeId] ];
-        console.log(challenge);
       let finalChallenge = { ...userChallenge, ...challenge };
       if (userChallenge.completedDate) {
         finalChallenge.completedDate = moment

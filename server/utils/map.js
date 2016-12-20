@@ -50,10 +50,6 @@ export function cachedMap(Block) {
   const map$ = Block.find$(query)
     .flatMap(blocks => Observable.from(blocks.map(block => block.toJSON())))
     .reduce((map, block) => {
-      console.log('caching........................')
-        console.log(map);
-        console.log(block);
-        console.log('*****************************')
         if (map[block.superBlock]) {
         map[block.superBlock].blocks.push(block);
       } else {
@@ -71,21 +67,13 @@ export function cachedMap(Block) {
     }, {})
     .map(map => normalize(map, mapSchema))
     .map(map => {
-        console.log('mapping.................')
-        console.log(map.entities)
-        console.log(map.entities.block)
-        console.log(Object.keys(map.entities.block))
       // make sure challenges are in the right order
       map.entities.block = Object.keys(map.entities.block)
         // turn map into array
         .map(key => map.entities.block[key])
         // perform re-order
         .map(block => {
-            console.log('huhuhua......................')
           block.challenges = block.challenges.reduce((accu, dashedName) => {
-              console.log('doing..............................')
-              console.log(map.entities.challenge[dashedName].suborder);
-              console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
             const index = map.entities.challenge[dashedName].suborder;
             accu[index - 1] = dashedName;
             return accu;
@@ -94,7 +82,6 @@ export function cachedMap(Block) {
         })
         // turn back into map
         .reduce((blockMap, block) => {
-            console.log(block)
           blockMap[block.dashedName] = block;
           return blockMap;
         }, {});
@@ -102,8 +89,6 @@ export function cachedMap(Block) {
     })
     .map(map => {
       // re-order superBlocks result
-        console.log('+++++++++++++++++++++++++++++=====================================')
-        console.log(map.result)
       const result = map.result.reduce((result, supName) => {
 
         const index = map.entities['superBlock'][supName].order;

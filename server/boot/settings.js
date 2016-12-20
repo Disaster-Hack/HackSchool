@@ -51,7 +51,6 @@ export default function settingsController(app) {
   }
 
   function updateMyCurrentChallenge(req, res, next) {
-      console.log('hello. from settings server boot................................................');
     const { user, body: { currentChallengeId } } = req;
     if (!isMongoId('' + currentChallengeId)) {
       return next(new Error(`${currentChallengeId} is not a valid ObjectId`));
