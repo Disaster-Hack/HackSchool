@@ -21,7 +21,7 @@ module.exports = function(app) {
     debug('removing user', ctx.where);
     var id = ctx.where && ctx.where.id ? ctx.where.id : null;
     if (!id) {
-      next();
+      return next();
     }
     return Observable.combineLatest(
       destroyAllRelated(id, UserIdentity),
@@ -66,39 +66,39 @@ module.exports = function(app) {
   // send welcome email to new camper
   User.afterRemote('create', function({ req, res }, user, next) {
     debug('user created, sending email');
-    // if (!user.email || !isEmail(user.email)) {
-    //      next();
-    //     return null;
-    //   }
-    // const redirect = req.session && req.session.returnTo ? req.session.returnTo : '/';
-    //
-    // var mailOptions = {
-    //   type: 'email',
-    //   to: user.email,
-    //   from: 'Team@freecodecamp.com',
-    //   subject: 'Welcome to Free Code Camp!',
-    //   protocol: isDev ? null : 'https',
-    //   host: isDev ? 'localhost' : 'freecodecamp.com',
-    //   port: isDev ? null : 443,
-    //   template: path.join(
-    //     __dirname,
-    //     '..',
-    //     'views',
-    //     'emails',
-    //     'a-extend-user-welcome.ejs'
-    //   ),
-    //   redirect: '/email-signin'
-    // };
-    // debug('sending welcome email');
-    // return user.verify(mailOptions, function(err) {
-    //   if (err) { return next(err); }
-    //   req.flash('success', {
-    //     msg: [ 'Congratulations ! We\'ve created your account. ',
-    //            'Please check your email. We sent you a link that you can ',
-    //            'click to verify your email address and then login.'
-    //          ].join('')
-    //   });
-    //   return res.redirect(redirect);
-    // });
+    if (!user.email || !isEmail(user.email)) { return next(); }
+    const redirect = req.session && req.session.returnTo ?
+      req.session.returnTo :
+      '/';
+
+    var mailOptions = {
+      type: 'email',
+      to: user.email,
+      from: 'Team@freecodecamp.com',
+      subject: 'Welcome to Free Code Camp!',
+      protocol: isDev ? null : 'https',
+      host: isDev ? 'localhost' : 'freecodecamp.com',
+      port: isDev ? null : 443,
+      template: path.join(
+        __dirname,
+        '..',
+        'views',
+        'emails',
+        'a-extend-user-welcome.ejs'
+      ),
+      redirect: '/email-signin'
+    };
+
+    debug('sending welcome email');
+    return user.verify(mailOptions, function(err) {
+      if (err) { return next(err); }
+      req.flash('success', {
+        msg: [ 'Congratulations ! We\'ve created your account. ',
+               'Please check your email. We sent you a link that you can ',
+               'click to verify your email address and then login.'
+             ].join('')
+      });
+      // return res.redirect(redirect);
+    });
   });
 };

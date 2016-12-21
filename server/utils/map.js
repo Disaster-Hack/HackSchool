@@ -50,7 +50,7 @@ export function cachedMap(Block) {
   const map$ = Block.find$(query)
     .flatMap(blocks => Observable.from(blocks.map(block => block.toJSON())))
     .reduce((map, block) => {
-        if (map[block.superBlock]) {
+      if (map[block.superBlock]) {
         map[block.superBlock].blocks.push(block);
       } else {
         map[block.superBlock] = {
@@ -62,7 +62,6 @@ export function cachedMap(Block) {
           message: block.superBlockMessage
         };
       }
-
       return map;
     }, {})
     .map(map => normalize(map, mapSchema))
@@ -89,9 +88,8 @@ export function cachedMap(Block) {
     })
     .map(map => {
       // re-order superBlocks result
-      const result = map.result.reduce((result, supName) => {
-
-        const index = map.entities['superBlock'][supName].order;
+      const result = Object.keys(map.result).reduce((result, supName) => {
+        const index = map.entities.superBlock[supName].order;
         result[index] = supName;
         return result;
       }, []);

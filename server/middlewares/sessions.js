@@ -7,7 +7,6 @@ const sessionSecret = process.env.SESSION_SECRET;
 const url = process.env.MONGODB || process.env.MONGOHQ_URL;
 
 const app = loopback();
-
 export default function sessionsMiddleware() {
 
     if (app.get('env') === "production") {

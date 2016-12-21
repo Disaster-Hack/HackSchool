@@ -103,10 +103,10 @@ export default function setupPassport(app) {
     config.session = config.session !== false;
     configurator.configureProvider(
       strategy,
-      {
-        ...config,
-        ...passportOptions
-      }
+        {
+            ...config,
+            ...passportOptions
+        }
     );
   });
 }

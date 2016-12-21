@@ -9,7 +9,7 @@ export default function prodErrorHandler() {
   // disabling eslint due to express parity rules for error handlers
   return function(err, req, res, next) { // eslint-disable-line
     // respect err.status
-      if (err.status) {
+    if (err.status) {
       res.statusCode = err.status;
     }
 

@@ -12,9 +12,14 @@
       "secure": true,
       "port": 465,
       "auth": {
-        "user": "",
+        "user": "beaconmerce@gmail.com",
         "pass": ""
       }
     }]
+  },
+  "mailgun": {
+    "connector": "loopback-connector-mailgun",
+    "apikey": "19491a9a533d1ec1dc11b4ef9e1f13eb",
+    "domain": "sandbox6ca95058c4dd463b87f4493b2d4ee9a1.mailgun.org"
   }
 }

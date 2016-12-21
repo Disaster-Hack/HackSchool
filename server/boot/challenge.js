@@ -176,6 +176,7 @@ export default function(app) {
     req.checkBody('id', 'id must be an ObjectId').isMongoId();
     const type = accepts(req).type('html', 'json', 'text');
     const errors = req.validationErrors(true);
+
     if (errors) {
       if (type === 'json') {
         return res.status(403).send({ errors });
@@ -203,6 +204,7 @@ export default function(app) {
 
         const user = req.user;
         const points = alreadyCompleted ? user.points : user.points + 1;
+
         return user.update$(updateData)
           .doOnNext(({ count }) => log('%s documents updated', count))
           .map(() => {

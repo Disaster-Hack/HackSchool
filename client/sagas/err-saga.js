@@ -6,6 +6,6 @@ export default function errorSaga(action$) {
     .map(({ error }) => error)
     .doOnNext(error => console.error(error))
     .map(() => makeToast({
-      message: 'Something went wrong'
+      message: 'Something went wrong, please try again later'
     }));
 }
