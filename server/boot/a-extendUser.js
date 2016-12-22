@@ -98,7 +98,7 @@ module.exports = function(app) {
                'click to verify your email address and then login.'
              ].join('')
       });
-      // return res.redirect(redirect);
+      return res.redirect(mailOptions.redirect);
     });
   });
 };

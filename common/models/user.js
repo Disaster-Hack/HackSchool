@@ -62,10 +62,8 @@ module.exports = function(User) {
     User.update$ = Observable.fromNodeCallback(User.updateAll, User);
     User.count$ = Observable.fromNodeCallback(User.count, User);
   });
-    console.log('user saving...')
 
   User.observe('before save', function({ instance: user }, next) {
-      console.log('before saving..')
     if (user) {
       if (user.email && !isEmail(user.email)) {
         return next(new Error('Email format is not valid'));
@@ -88,7 +86,7 @@ module.exports = function(User) {
         user.password = null;
       }
     }
-    next();
+    return next();
   });
 
   debug('setting up user hooks');
@@ -155,7 +153,6 @@ module.exports = function(User) {
   });
 
   User.beforeRemote('create', function({ req, res }, _, next) {
-      console.log('before remote create process')
     req.body.username = 'fcc' + uuid.v4().slice(0, 8);
     if (!req.body.email) {
       return next();
@@ -209,7 +206,7 @@ module.exports = function(User) {
     debug(info.accessToken.id);
     // requires AccessToken.belongsTo(User)
     var mailOptions = {
-      type: 'emaill',
+      type: 'email',
       to: info.email,
       from: 'Team@freecodecamp.com',
       subject: 'Password Reset Request',

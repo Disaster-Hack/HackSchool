@@ -28,7 +28,7 @@
     "public": false
   },
   "Email": {
-    "dataSource": "mailgun",
+    "dataSource": "mail",
     "public": false
   },
   "challenge": {
