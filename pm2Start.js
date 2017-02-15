@@ -15,7 +15,9 @@ pm2.connect(function() {
     'exec_mode': 'cluster',
     instances: instances,
     'max_memory_restart': maxMemory,
-    'NODE_ENV': 'production'
+      env: {
+          "NODE_ENV": "production",
+      }
   }, function() {
     console.log(
       'pm2 started %s with %s instances at %s max memory',

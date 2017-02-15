@@ -7,7 +7,7 @@ module.exports = {
     url: secrets.db
   },
   mail: {
-    connector: 'mailgu',
+    connector: 'mail',
     transport: {
       type: 'ses',
       accessKeyId: process.env.SES_ID,

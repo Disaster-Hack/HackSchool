@@ -76,9 +76,9 @@ module.exports = function(app) {
       to: user.email,
       from: 'info@disasterhack.org',
       subject: 'Welcome to Hack School!',
-      protocol: isDev ? null : 'https',
+      protocol: isDev ? null : 'http',
       host: isDev ? 'localhost' : 'hackschool.disasterhack.org',
-      port: isDev ? null : 443,
+       port: isDev ? null : 80,
       template: path.join(
         __dirname,
         '..',
