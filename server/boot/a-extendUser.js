@@ -74,10 +74,10 @@ module.exports = function(app) {
     var mailOptions = {
       type: 'email',
       to: user.email,
-      from: 'Team@freecodecamp.com',
-      subject: 'Welcome to Free Code Camp!',
+      from: 'info@disasterhack.org',
+      subject: 'Welcome to Hack School!',
       protocol: isDev ? null : 'https',
-      host: isDev ? 'localhost' : 'freecodecamp.com',
+      host: isDev ? 'localhost' : 'hackschool.disasterhack.org',
       port: isDev ? null : 443,
       template: path.join(
         __dirname,

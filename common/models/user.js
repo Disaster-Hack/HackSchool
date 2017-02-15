@@ -197,7 +197,7 @@ module.exports = function(User) {
       url = `http://${host}:${port}/reset-password?access_token=${token}`;
     } else {
       url =
-        `http://freecodecamp.com/reset-password?access_token=${token}`;
+        `http://hackschool.disasterhack.org/reset-password?access_token=${token}`;
     }
 
     // the email of the requested user
@@ -208,12 +208,12 @@ module.exports = function(User) {
     var mailOptions = {
       type: 'email',
       to: info.email,
-      from: 'Team@freecodecamp.com',
+      from: 'info@disasterhack.org',
       subject: 'Password Reset Request',
       text: `
         Hello,\n\n
         This email is confirming that you requested to
-        reset your password for your Free Code Camp account.
+        reset your password for your Hack School account.
         This is your email: ${ info.email }.
         Go to ${ url } to reset your password.
         \n
@@ -441,10 +441,10 @@ module.exports = function(User) {
         const mailOptions = {
           type: 'email',
           to: email,
-          from: 'Team@freecodecamp.com',
-          subject: 'Welcome to Free Code Camp!',
+          from: 'info@disasterhack.org',
+          subject: 'Welcome to Hack School!',
           protocol: isDev ? null : 'https',
-          host: isDev ? 'localhost' : 'freecodecamp.com',
+          host: isDev ? 'localhost' : 'hackschool.disasterhack.org',
           port: isDev ? null : 443,
           template: path.join(
             __dirname,

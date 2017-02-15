@@ -228,8 +228,8 @@ export default class FCCNav extends React.Component {
             pullRight={ true }
             >
             { this.renderMapLink(isOnMap, toggleMapDrawer) }
-            { this.renderChat(toggleMainChat) }
-            { this.renderLinks() }
+            {/*{ this.renderChat(toggleMainChat) }*/}
+            {/*{ this.renderLinks() }*/}
             { this.renderSignIn(username, points, picture, showLoading) }
           </Nav>
         </Navbar.Collapse>
